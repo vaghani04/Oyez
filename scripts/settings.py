@@ -3,7 +3,7 @@ import os
 class Settings:
     def __init__(self):
         self.START_YEAR = 1990
-        self.END_YEAR = 1994
+        self.END_YEAR = 1990
         self.BASE_URL = "https://api.oyez.org"
         self.PARSED_CASES_DIR = "parsed_cases"
         # self.PARSED_CASES_DIR = "parsed_cases_2"
