@@ -8,3 +8,7 @@ class FileUtils:
     def write_json_file(self, file_path, data):
         with open(file_path, "w") as f:
             json.dump(data, f, indent=4)
+
+    def write_binary_file(self, file_path, data):
+        with open(file_path, "wb") as f:
+            f.write(data)

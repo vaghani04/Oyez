@@ -53,5 +53,9 @@ class CaseFetcher:
             await asyncio.gather(*year_tasks)
 
 if __name__ == "__main__":
+    import time
+    start = time.time()
     fetcher = CaseFetcher()
     asyncio.run(fetcher.run())
+    end = time.time()
+    print(f'Total Time: {(end-start):.2f}')
