@@ -9,5 +9,6 @@ class Settings:
         self.RESOLVED_DIR = os.path.join(self.PARSED_CASES_DIR, "Resolved")
         self.UNRESOLVED_DIR = os.path.join(self.PARSED_CASES_DIR, "UnResolved")
         self.ATTORNEYS_DIR = "attorneys"
+        self.MEMBERS_DIR = "members"
         self.IMAGES_DIR = "images"
         self.DETAILS_FILE = "details.json"
