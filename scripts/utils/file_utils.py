@@ -12,3 +12,7 @@ class FileUtils:
     def write_binary_file(self, file_path, data):
         with open(file_path, "wb") as f:
             f.write(data)
+
+    def write_text_file(self, file_path, text):
+        with open(file_path, "w") as f:
+            f.write(text)

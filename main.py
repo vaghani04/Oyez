@@ -34,6 +34,11 @@ class CaseFetcher:
             for case in cases:
                 case_href = case.get("href")
                 case_id = case.get("ID")
+                # if case_id == 63187:  # This is for year 2020
+                #     if not case_href or not case_id:
+                #         print(f"Skipping case in year {year}: Missing href or id")
+                #         continue
+                #     tasks.append(self.case_processor.process_case(session, case_href, case_id))
                 if not case_href or not case_id:
                     print(f"Skipping case in year {year}: Missing href or id")
                     continue
