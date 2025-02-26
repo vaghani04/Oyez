@@ -17,23 +17,23 @@ async def fetch_pinecone_response(query):
     start_time = time.time()
     result = await processor.process_query(query)
     elapsed_time = time.time() - start_time
-    return result["response"], elapsed_time
+    return result["response"], elapsed_time, result.get("scores", [])
 
 async def fetch_milvus_response(query):
     processor = MilvusLocalLLMProcessor()
     start_time = time.time()
     result = await processor.process_query(query)
     elapsed_time = time.time() - start_time
-    return result["response"], elapsed_time
+    return result["response"], elapsed_time, result.get("scores", [])
 
 async def process_dual_queries(query):
     pinecone_task = asyncio.create_task(fetch_pinecone_response(query))
     milvus_task = asyncio.create_task(fetch_milvus_response(query))
-    pinecone_response, pinecone_time = await pinecone_task
-    milvus_response, milvus_time = await milvus_task
+    pinecone_response, pinecone_time, pinecone_scores = await pinecone_task
+    milvus_response, milvus_time, milvus_scores = await milvus_task
     return {
-        "pinecone": {"response": pinecone_response, "time": pinecone_time},
-        "milvus": {"response": milvus_response, "time": milvus_time}
+        "pinecone": {"response": pinecone_response, "time": pinecone_time, "scores": pinecone_scores},
+        "milvus": {"response": milvus_response, "time": milvus_time, "scores": milvus_scores}
     }
 
 def render_ui():
@@ -53,10 +53,18 @@ def render_ui():
                 with col1:
                     st.subheader(f"Pinecone Cloud Response (Time: {results['pinecone']['time']:.2f}s)")
                     st.markdown(results["pinecone"]["response"])
+                    if results["pinecone"]["scores"]:
+                        st.markdown("**Relevance Scores:**")
+                        for score in results["pinecone"]["scores"]:
+                            st.markdown(f"- Case {score['id']}: {score['score']:.4f}")
 
                 with col2:
                     st.subheader(f"Milvus Local Response (Time: {results['milvus']['time']:.2f}s)")
                     st.markdown(results["milvus"]["response"])
+                    if results["milvus"]["scores"]:
+                        st.markdown("**Relevance Scores:**")
+                        for score in results["milvus"]["scores"]:
+                            st.markdown(f"- Case {score['id']}: {score['score']:.4f}")
 
             except Exception as e:
                 st.error(f"An error occurred: {e}")

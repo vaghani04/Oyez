@@ -16,7 +16,7 @@ class RagSettings:
         self.PINECONE_NAMESPACE = "oyez-namespace"
         self.PINECONE_DIMENSION = 384
         self.BATCH_SIZE = 100
-        self.TOP_K = 8
+        self.TOP_K = 5
         self.MODEL_NAME = "all-MiniLM-L6-v2"
         self.GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
         self.GEMINI_MODEL = "gemini-1.5-flash"

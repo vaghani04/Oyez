@@ -20,7 +20,9 @@ class MilvusLocalLLMProcessor:
             parsed = self.llm_utils.parse_docs(matches)
             prompt_parts = self.llm_utils.build_prompt(parsed, query)
             response = await asyncio.to_thread(self.model.generate_content, prompt_parts)
-            return {"response": response.text}
+            scores = [{"id": match["id"], "score": match["score"]} for match in matches]
+            return {"response": response.text, "scores": scores}
+        
         except Exception as e:
             print(f"Error processing query '{query}': {e}")
             return {"response": "Oops! Something went wrong while fetching your answer from Milvus Local."}

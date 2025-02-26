@@ -13,7 +13,7 @@ class LocalSettings:
         self.MILVUS_DB_PATH = os.path.join(self.MILVUS_LOCAL_DIR, "milvus_oyez.db")
         self.COLLECTION_NAME = "oyez_cases"
         self.DIMENSION = 384
-        self.TOP_K = 8
+        self.TOP_K = 5
         self.MODEL_NAME = "all-MiniLM-L6-v2"
         self.GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
         self.GEMINI_MODEL = "gemini-1.5-flash"
