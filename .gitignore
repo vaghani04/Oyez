@@ -3,3 +3,5 @@ parsed_cases
 .venv
 parsed_cases_2
 .env
+milvus_local/.milvus_oyez.db.lock
+milvus_docker/volumes
